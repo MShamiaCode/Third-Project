@@ -1,0 +1,420 @@
+@layer reset, base, layout, components;
+/*Settings the order of the importance so after make this settings not important change order of layer */
+
+/* Start Reset Layer */
+@layer reset {
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  /* https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html */
+  [role="list"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-block-size: 100vh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  img,
+  picture {
+    max-inline-size: 100%; /*max-inline-size mean up and down  */
+    display: block;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+/* End Reset Layer */
+
+/* Start Base Layer  [:root, global styles, custom Props]*/
+@layer base {
+  :root {
+    /* primitives here */
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-gray-100: hsl(0, 2%, 79%);
+
+    --clr-brand-400: hsl(25, 88%, 75%);
+    --clr-brand-500: hsl(25, 88%, 66%);
+
+    --clr-green-400: hsl(143, 19%, 49%);
+    --clr-green-500: hsl(143, 38%, 37%);
+    --clr-green-600: hsl(145, 29%, 19%);
+
+    --clr-brown-500: hsl(10, 5%, 25%);
+    --clr-brown-600: hsl(9, 7%, 21%);
+    --clr-brown-700: hsl(9, 8%, 16%);
+    --clr-brown-800: hsl(0, 6%, 15%);
+    --clr-brown-900: hsl(0, 6%, 13%);
+
+    --clr-orange-500: hsl(28, 43%, 28%);
+    --clr-red-500: hsl(359, 34%, 24%);
+    --clr-teal-500: hsl(186, 42%, 25%);
+
+    /* Font Family */
+
+    --ff-body: "Fira Sans", sans-serif;
+    --ff-heading: "Outfit", sans-serif;
+
+    /* Font Size */
+    /* Rem = 16px */
+    --fs-300: 0.875rem;
+    --fs-400: 1rem;
+    --fs-500: 1.255rem;
+    --fs-600: 1.25rem;
+    --fs-700: 1.5rem;
+    --fs-800: 2rem;
+    --fs-900: 3.75rem;
+    --fs-1000: 3.75rem;
+
+    @media (width > 760px) {
+      --fs-300: 0.875rem;
+      --fs-400: 1rem;
+      --fs-500: 1.25rem;
+      --fs-600: 1.5rem;
+      --fs-700: 2rem;
+      --fs-800: 3rem;
+      --fs-900: 5rem;
+      --fs-1000: 7.5rem;
+    }
+  }
+  :root {
+    /*semantic  Custom Properties */
+    --text-main: var(--clr-gray-100);
+    --text-high-contrast: var(--clr-white);
+    --text-brand: var(--clr-brand-500);
+    --text-brand-light: var(--clr-brand-400);
+
+    --background-accent-light: var(--clr-green-400);
+    --background-accent-main: var(--clr-green-500);
+    --background-accent-dark: var(--clr-green-600);
+
+    --background-extra-light: var(--clr-brown-500);
+    --background-light: var(--clr-brown-600);
+    --background-main: var(--clr-brown-700);
+    --background-dark: var(--clr-brown-800);
+    --background-extra-dark: var(--clr-brown-900);
+  }
+  :root {
+    --font-size-heading-sm: var(--fs-700);
+    --font-size-heading-regular: var(--fs-800);
+    --font-size-heading-lg: var(--fs-900);
+    --font-size-heading-xl: var(--fs-1000);
+
+    --font-size-sm: var(--fs-300);
+    --font-size-regular: var(--fs-400);
+    --font-size-md: var(--fs-500);
+    --font-size-lg: var(--fs-600);
+  }
+  :root {
+    --border-radius-1: 0.25rem;
+    --border-radius-2: 0.5rem;
+    --border-radius-3: 0.75rem;
+  }
+  /*Base Style in General and good for inheritance then can be override  */
+  body {
+    font-family: var(--ff-body);
+    font-size: var(--font-size-regular);
+    color: var(--text-main);
+    background-color: var(--background-main);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--ff-heading);
+    color: var(--text-high-contrast);
+    font-weight: 700;
+  }
+  h1 {
+    font-size: var(--font-size-heading-lg);
+  }
+  a {
+    color: var(--text-high-contrast);
+    display: block;
+  }
+  a:hover,
+  a:focus-visible {
+    color: var(--text-brand-light);
+    /* Focus-visible is for keyboard users and it's not supported in all browsers when leave focus on the link return to the original state */
+  }
+  img {
+    border-radius: var(--border-radius-3);
+    -webkit-border-radius: var(--border-radius-3);
+    -moz-border-radius: var(--border-radius-3);
+    -ms-border-radius: var(--border-radius-3);
+    -o-border-radius: var(--border-radius-3);
+  }
+}
+/* End Base Layer */
+/* Start Layout Layer */
+@layer layout {
+  .flow > * + * {
+    /* direct sibling selector not include the first element */
+    margin-top: var(--flow-space, 1rem);
+  }
+  .grid-flow {
+    display: grid;
+    gap: var(--grid-flow-gap, 1rem);
+  }
+  .equal-columns {
+    display: grid;
+    gap: var(--equal-columns-gap, 1em);
+    align-items: var(--equal-columns-vertical-alignment, stretch);
+
+    @media (width > 760px) {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+    }
+    &[data-gap="large"] {
+      --equal-columns-gap: 2rem;
+    }
+    &[data-alignment="center"] {
+      --equal-columns-vertical-alignment: center;
+    }
+  }
+
+  .section {
+    --padding-section: 3.5rem;
+    padding-block: var(--padding-section);
+    /* padding-block mean padding-top and padding-bottom  */
+    /* padding-inline mean padding-left and padding-right without effect on top and bottom */
+    @media (width > 760px) {
+      --padding-section: 8rem;
+
+      &[data-padding="compact"] {
+        --padding-section: 4.5rem;
+      }
+    }
+  }
+  .wrapper {
+    --wrapper-max-width: 1130px;
+    max-width: var(--wrapper-max-width);
+    margin-inline: auto; /*same margin:0 auto */
+    padding-inline: 1rem; /*same padding:0 1rem */
+
+    &[data-width="wide"] {
+      --wrapper-max-width: 1330px;
+    }
+    &[data-width="narrow"] {
+      --wrapper-max-width: 720px;
+    }
+  }
+}
+/* End Layout Layer */
+@layer components {
+  .site-header {
+    padding-block: 1rem;
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .primary-navigation {
+    ul {
+      display: flex;
+      gap: 0.5rem 1rem;
+      flex-wrap: wrap;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+  .hero {
+    background-image: url(../images/hero.png);
+    background-size: cover;
+    text-align: center;
+    color: var(--text-high-contrast);
+    font-size: var(--font-size-md);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-heading-lg);
+    > span {
+      display: block;
+      color: var(--text-brand);
+      font-size: var(--font-size-heading-xl);
+    }
+  }
+  .card {
+    /* We put var (var value, default value) var value if you wanna change style in future can delerate the var in parent and give it new value */
+    display: grid;
+    gap: var(--card-gap, 1rem);
+    padding: 1rem;
+    background-color: var(--background-light);
+    border-radius: var(--border-radius-3);
+    -webkit-border-radius: var(--border-radius-3);
+    -moz-border-radius: var(--border-radius-3);
+    -ms-border-radius: var(--border-radius-3);
+    -o-border-radius: var(--border-radius-3);
+
+    img {
+      border-radius: var(--border-radius-2);
+      -webkit-border-radius: var(--border-radius-2);
+      -moz-border-radius: var(--border-radius-2);
+      -ms-border-radius: var(--border-radius-2);
+      -o-border-radius: var(--border-radius-2);
+    }
+    .card__title {
+      color: var(--card-title-color, var(--text-brand));
+      font-size: var(--card-title-font-size, var(--font-size-heading-sm));
+    }
+  }
+  .button {
+    display: flex inline;
+    font-size: var(--font-size-md);
+    padding: 0.5rem 1rem;
+    background-color: var(--background-accent-main);
+    font-family: var(--ff-heading);
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: var(--border-radius-1);
+    -webkit-border-radius: var(--border-radius-1);
+    -moz-border-radius: var(--border-radius-1);
+    -ms-border-radius: var(--border-radius-1);
+    -o-border-radius: var(--border-radius-1);
+  }
+  .button:hover,
+  .button:focus-visible {
+    color: var(--text-high-contrast);
+    background-color: var(--background-accent-light);
+  }
+  .site-footer {
+    text-align: center;
+    background-color: var(--background-dark);
+    padding-block: 2rem;
+    display: grid;
+    gap: 2rem;
+
+    a {
+      text-decoration: none;
+      color: var(--text-main);
+      &:hover,
+      &:focus-visible {
+        color: var(--text-brand-light);
+      }
+    }
+  }
+  .site-footer__title {
+    font-size: var(--font-size-md);
+    font-family: var(--ff-heading);
+    font-weight: 700;
+  }
+}
+/* Start Utilities Layer */
+@layer utilities {
+  /* This for Screen reader only to explain the purpose of the element  (link)*/
+  /* So other people that are using screen readers will be able to access  */
+  /* sr-only */
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+  .text-brand {
+    color: var(--text-brand);
+  }
+  .text-high-contrast {
+    color: var(--text-high-contrast);
+  }
+
+  .section-title {
+    font-size: var(--font-size-heading-regular);
+  }
+
+  .background-base {
+    background-color: var(--background-base);
+  }
+  .background-light {
+    background-color: var(--background-light);
+  }
+  .background-extra-light {
+    background-color: var(--background-extra-light);
+  }
+  .background-dark {
+    background-color: var(--background-dark);
+  }
+  .background-extra-dark {
+    background-color: var(--background-extra-dark);
+  }
+
+  .background-accent {
+    background-color: var(--background-accent-dark);
+  }
+
+  .font-size-sm {
+    font-size: var(--font-size-sm);
+  }
+  .font-size-regular {
+    font-size: var(--font-size-regular);
+  }
+  .font-size-md {
+    font-size: var(--font-size-md);
+  }
+  .font-size-lg {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* End Utilities Layer */
