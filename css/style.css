@@ -3,6 +3,7 @@
 
 /* Start Reset Layer */
 @layer reset {
+
   *::before,
   *::after {
     box-sizing: border-box;
@@ -63,7 +64,8 @@
 
   img,
   picture {
-    max-inline-size: 100%; /*max-inline-size mean up and down  */
+    max-inline-size: 100%;
+    /*max-inline-size mean up and down  */
     display: block;
   }
 
@@ -74,6 +76,7 @@
     font: inherit;
   }
 }
+
 /* End Reset Layer */
 
 /* Start Base Layer  [:root, global styles, custom Props]*/
@@ -127,6 +130,7 @@
       --fs-1000: 7.5rem;
     }
   }
+
   :root {
     /*semantic  Custom Properties */
     --text-main: var(--clr-gray-100);
@@ -144,6 +148,7 @@
     --background-dark: var(--clr-brown-800);
     --background-extra-dark: var(--clr-brown-900);
   }
+
   :root {
     --font-size-heading-sm: var(--fs-700);
     --font-size-heading-regular: var(--fs-800);
@@ -155,11 +160,13 @@
     --font-size-md: var(--fs-500);
     --font-size-lg: var(--fs-600);
   }
+
   :root {
     --border-radius-1: 0.25rem;
     --border-radius-2: 0.5rem;
     --border-radius-3: 0.75rem;
   }
+
   /*Base Style in General and good for inheritance then can be override  */
   body {
     font-family: var(--ff-body);
@@ -167,6 +174,7 @@
     color: var(--text-main);
     background-color: var(--background-main);
   }
+
   h1,
   h2,
   h3,
@@ -175,18 +183,22 @@
     color: var(--text-high-contrast);
     font-weight: 700;
   }
+
   h1 {
     font-size: var(--font-size-heading-lg);
   }
+
   a {
     color: var(--text-high-contrast);
     display: block;
   }
+
   a:hover,
   a:focus-visible {
     color: var(--text-brand-light);
     /* Focus-visible is for keyboard users and it's not supported in all browsers when leave focus on the link return to the original state */
   }
+
   img {
     border-radius: var(--border-radius-3);
     -webkit-border-radius: var(--border-radius-3);
@@ -195,17 +207,20 @@
     -o-border-radius: var(--border-radius-3);
   }
 }
+
 /* End Base Layer */
 /* Start Layout Layer */
 @layer layout {
-  .flow > * + * {
+  .flow>*+* {
     /* direct sibling selector not include the first element */
     margin-top: var(--flow-space, 1rem);
   }
+
   .grid-flow {
     display: grid;
     gap: var(--grid-flow-gap, 1rem);
   }
+
   .equal-columns {
     display: grid;
     gap: var(--equal-columns-gap, 1em);
@@ -215,9 +230,11 @@
       grid-auto-flow: column;
       grid-auto-columns: 1fr;
     }
+
     &[data-gap="large"] {
       --equal-columns-gap: 2rem;
     }
+
     &[data-alignment="center"] {
       --equal-columns-vertical-alignment: center;
     }
@@ -226,6 +243,7 @@
   .section {
     --padding-section: 3.5rem;
     padding-block: var(--padding-section);
+
     /* padding-block mean padding-top and padding-bottom  */
     /* padding-inline mean padding-left and padding-right without effect on top and bottom */
     @media (width > 760px) {
@@ -236,26 +254,32 @@
       }
     }
   }
+
   .wrapper {
     --wrapper-max-width: 1130px;
     max-width: var(--wrapper-max-width);
-    margin-inline: auto; /*same margin:0 auto */
-    padding-inline: 1rem; /*same padding:0 1rem */
+    margin-inline: auto;
+    /*same margin:0 auto */
+    padding-inline: 1rem;
+    /*same padding:0 1rem */
 
     &[data-width="wide"] {
       --wrapper-max-width: 1330px;
     }
+
     &[data-width="narrow"] {
       --wrapper-max-width: 720px;
     }
   }
 }
+
 /* End Layout Layer */
 
 @layer components {
   .site-header {
     padding-block: 1rem;
   }
+
   .site-header__inner {
     display: flex;
     align-items: center;
@@ -269,10 +293,13 @@
     background: transparent;
     border: 0;
     cursor: pointer;
-    display: none; /* for mobile */
+    display: none;
+
+    /* for mobile */
     @media (width < 760px) {
       display: block;
     }
+
     img {
       border-radius: 0;
       -webkit-border-radius: 0;
@@ -281,12 +308,14 @@
       -o-border-radius: 0;
     }
   }
+
   .primary-navigation {
     ul {
       display: flex;
       gap: 0.5rem 1rem;
       flex-wrap: wrap;
     }
+
     a {
       text-decoration: none;
     }
@@ -307,7 +336,8 @@
         flex-direction: column;
         gap: 0;
       }
-      li + li {
+
+      li+li {
         margin-block-start: 1.5rem;
         padding-block-start: 1.5rem;
         border-top: 2px solid var(--background-accent-light);
@@ -318,6 +348,7 @@
       &[data-visible="true"] {
         display: block;
       }
+
       &[data-visible="false"] {
         display: none;
       }
@@ -334,12 +365,14 @@
 
   .hero__title {
     font-size: var(--font-size-heading-lg);
-    > span {
+
+    >span {
       display: block;
       color: var(--text-brand);
       font-size: var(--font-size-heading-xl);
     }
   }
+
   .card {
     /* We put var (var value, default value) var value if you wanna change style in future can delerate the var in parent and give it new value */
     display: grid;
@@ -359,11 +392,13 @@
       -ms-border-radius: var(--border-radius-2);
       -o-border-radius: var(--border-radius-2);
     }
+
     .card__title {
       color: var(--card-title-color, var(--text-brand));
       font-size: var(--card-title-font-size, var(--font-size-heading-sm));
     }
   }
+
   .button {
     display: flex inline;
     font-size: var(--font-size-md);
@@ -379,11 +414,13 @@
     -ms-border-radius: var(--border-radius-1);
     -o-border-radius: var(--border-radius-1);
   }
+
   .button:hover,
   .button:focus-visible {
     color: var(--text-high-contrast);
     background-color: var(--background-accent-light);
   }
+
   .site-footer {
     text-align: center;
     background-color: var(--background-dark);
@@ -394,20 +431,24 @@
     a {
       text-decoration: none;
       color: var(--text-main);
+
       &:hover,
       &:focus-visible {
         color: var(--text-brand-light);
       }
     }
   }
+
   .site-footer__title {
     font-size: var(--font-size-md);
     font-family: var(--ff-heading);
     font-weight: 700;
   }
 }
+
 /* Start Utilities Layer */
 @layer utilities {
+
   /* This for Screen reader only to explain the purpose of the element  (link)*/
   /* So other people that are using screen readers will be able to access  */
   /* sr-only */
@@ -424,9 +465,11 @@
   .text-center {
     text-align: center;
   }
+
   .text-brand {
     color: var(--text-brand);
   }
+
   .text-high-contrast {
     color: var(--text-high-contrast);
   }
@@ -438,15 +481,19 @@
   .background-base {
     background-color: var(--background-base);
   }
+
   .background-light {
     background-color: var(--background-light);
   }
+
   .background-extra-light {
     background-color: var(--background-extra-light);
   }
+
   .background-dark {
     background-color: var(--background-dark);
   }
+
   .background-extra-dark {
     background-color: var(--background-extra-dark);
   }
@@ -458,12 +505,15 @@
   .font-size-sm {
     font-size: var(--font-size-sm);
   }
+
   .font-size-regular {
     font-size: var(--font-size-regular);
   }
+
   .font-size-md {
     font-size: var(--font-size-md);
   }
+
   .font-size-lg {
     font-size: var(--font-size-lg);
   }
