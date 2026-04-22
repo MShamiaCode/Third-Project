@@ -168,11 +168,16 @@
   }
 
   /*Base Style in General and good for inheritance then can be override  */
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--ff-body);
     font-size: var(--font-size-regular);
     color: var(--text-main);
     background-color: var(--background-main);
+
   }
 
   h1,
@@ -276,6 +281,28 @@
 /* End Layout Layer */
 
 @layer components {
+  .skip-to-main:not(:focus) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 1px;
+
+  }
+
+  .skip-to-main {
+    position: absolute;
+    background: var(--background-accent-main);
+    padding: 1rem;
+    outline: none;
+    border-radius: var(--border-radius-2);
+    -webkit-border-radius: var(--border-radius-2);
+    -moz-border-radius: var(--border-radius-2);
+    -ms-border-radius: var(--border-radius-2);
+    -o-border-radius: var(--border-radius-2);
+  }
+
   .site-header {
     padding-block: 1rem;
   }
