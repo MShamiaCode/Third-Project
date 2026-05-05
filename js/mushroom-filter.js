@@ -3,11 +3,31 @@ const seasonFilter = document.querySelector("#season");
 const edibleFilter = document.querySelector("#edible");
 const searchInput = document.querySelector("#mushroom-search");
 
+const cardRows = Array.from(cards, (card) => {
+  const seasonEl = card.querySelector("[data-season]");
+  const edibleEl = card.querySelector("[data-edible]");
+  return {
+    card,
+    season: seasonEl.dataset.season,
+    edible: edibleEl.dataset.edible,
+  };
+});
+
 const currentFilters = {
   season: "all",
   edible: "all",
   search: "",
 };
+
+const SEARCH_DEBOUNCE_MS = 150;
+let searchDebounceId = 0;
+
+function flushSearchFilter() {
+  window.clearTimeout(searchDebounceId);
+  searchDebounceId = 0;
+  currentFilters.search = searchInput.value;
+  runWithViewTransition(filterCards);
+}
 
 function runWithViewTransition(updateFn) {
   if (typeof document.startViewTransition !== "function") {
@@ -41,8 +61,14 @@ edibleFilter.addEventListener("change", function () {
 
 searchInput.addEventListener("input", function () {
   currentFilters.search = this.value;
-  runWithViewTransition(filterCards);
+  window.clearTimeout(searchDebounceId);
+  searchDebounceId = window.setTimeout(() => {
+    searchDebounceId = 0;
+    runWithViewTransition(filterCards);
+  }, SEARCH_DEBOUNCE_MS);
 });
+searchInput.addEventListener("blur", flushSearchFilter);
+searchInput.addEventListener("search", flushSearchFilter);
 
 function normalizeSearch(query) {
   return query.trim().toLowerCase();
@@ -56,9 +82,8 @@ function cardMatchesSearch(card, normalizedQuery) {
 function filterCards() {
   const normalizedQuery = normalizeSearch(currentFilters.search);
   let hasvisibleCards = false;
-  cards.forEach(function (card) {
-    const season = card.querySelector("[data-season]").dataset.season;
-    const edible = card.querySelector("[data-edible]").dataset.edible;
+  for (let i = 0; i < cardRows.length; i++) {
+    const { card, season, edible } = cardRows[i];
     const show =
       (currentFilters.season === "all" || currentFilters.season === season) &&
       (currentFilters.edible === "all" || currentFilters.edible === edible) &&
@@ -67,7 +92,7 @@ function filterCards() {
     if (show) {
       hasvisibleCards = true;
     }
-  });
+  }
   const noMatches = document.querySelector(".no-matches");
   if (noMatches) {
     noMatches.hidden = hasvisibleCards;

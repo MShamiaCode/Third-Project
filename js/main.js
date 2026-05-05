@@ -39,10 +39,17 @@ function closeNavWhenDesktop() {
 }
 desktopNavQuery.addEventListener("change", closeNavWhenDesktop);
 
-const resizeObserver = new ResizeObserver((entries) => {
-  document.body.classList.add("resizing");
-  requestAnimationFrame(() => {
-    document.body.classList.remove("resizing");
+let resizeObserverRaf = 0;
+const resizeObserver = new ResizeObserver(() => {
+  if (resizeObserverRaf) {
+    return;
+  }
+  resizeObserverRaf = requestAnimationFrame(() => {
+    resizeObserverRaf = 0;
+    document.body.classList.add("resizing");
+    requestAnimationFrame(() => {
+      document.body.classList.remove("resizing");
+    });
   });
 });
 resizeObserver.observe(document.body);
