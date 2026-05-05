@@ -9,6 +9,22 @@ const currentFilters = {
   search: "",
 };
 
+function runWithViewTransition(updateFn) {
+  if (typeof document.startViewTransition !== "function") {
+    updateFn();
+    return;
+  }
+  const transition = document.startViewTransition(updateFn);
+  const swallowAbort = (err) => {
+    if (err && err.name !== "AbortError") {
+      console.error(err);
+    }
+  };
+  transition.ready.catch(swallowAbort);
+  transition.updateCallbackDone.catch(swallowAbort);
+  transition.finished.catch(swallowAbort);
+}
+
 cards.forEach((card, index) => {
   const mushroomId = `mushroom-${index + 1}`;
   card.style.viewTransitionName = `card-${mushroomId}`;
@@ -16,34 +32,16 @@ cards.forEach((card, index) => {
 
 seasonFilter.addEventListener("change", function () {
   currentFilters.season = this.value;
-  if (typeof document.startViewTransition !== "function") {
-    filterCards();
-    return;
-  }
-  document.startViewTransition(() => {
-    filterCards();
-  });
+  runWithViewTransition(filterCards);
 });
 edibleFilter.addEventListener("change", function () {
   currentFilters.edible = this.value;
-  if (typeof document.startViewTransition !== "function") {
-    filterCards();
-    return;
-  }
-  document.startViewTransition(() => {
-    filterCards();
-  });
+  runWithViewTransition(filterCards);
 });
 
 searchInput.addEventListener("input", function () {
   currentFilters.search = this.value;
-  if (typeof document.startViewTransition !== "function") {
-    filterCards();
-    return;
-  }
-  document.startViewTransition(() => {
-    filterCards();
-  });
+  runWithViewTransition(filterCards);
 });
 
 function normalizeSearch(query) {

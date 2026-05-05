@@ -1,7 +1,3 @@
- @view-transition {
-   navigation: auto;
- }
-
  @layer reset, base, layout, components, utilities;
 
  /* Settings the order of the importance so after make this settings not important change order of layer */
