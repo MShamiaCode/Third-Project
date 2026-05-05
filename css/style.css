@@ -155,6 +155,7 @@
      --background-extra-light: var(--clr-brown-500);
      --background-light: var(--clr-brown-600);
      --background-main: var(--clr-brown-700);
+     --background-base: var(--clr-brown-700);
      --background-dark: var(--clr-brown-800);
      --background-extra-dark: var(--clr-brown-900);
 
@@ -180,6 +181,7 @@
        --background-extra-light: var(--clr-brown-100);
        --background-light: var(--clr-brown-200);
        --background-main: var(--clr-brown-300);
+       --background-base: var(--clr-brown-300);
        --background-dark: var(--clr-brown-400);
        --background-extra-dark: var(--clr-brown-500);
      }
@@ -669,7 +671,7 @@
 
    .button {
      color: var(--text-high-contrast);
-     display: flex inline;
+     display: inline-flex;
      font-size: var(--font-size-md);
      padding: 0.5rem 1rem;
      background-color: var(--background-accent-main);

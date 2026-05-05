@@ -71,7 +71,9 @@ function filterCards() {
     }
   });
   const noMatches = document.querySelector(".no-matches");
-  noMatches.style.display = hasvisibleCards ? "none" : "block";
+  if (noMatches) {
+    noMatches.hidden = hasvisibleCards;
+  }
 }
 function enableFiltering() {
   seasonFilter.hidden = false;
