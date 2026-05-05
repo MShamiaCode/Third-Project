@@ -1,10 +1,12 @@
-const cards = document.querySelectorAll(".mushroom-guide .card");
+const cards = document.querySelectorAll(".mushroom-guide .grid-auto-fill > .card");
 const seasonFilter = document.querySelector("#season");
 const edibleFilter = document.querySelector("#edible");
+const searchInput = document.querySelector("#mushroom-search");
 
 const currentFilters = {
   season: "all",
   edible: "all",
+  search: "",
 };
 
 cards.forEach((card, index) => {
@@ -14,7 +16,7 @@ cards.forEach((card, index) => {
 
 seasonFilter.addEventListener("change", function () {
   currentFilters.season = this.value;
-  if (!document.startViewTransition()) {
+  if (typeof document.startViewTransition !== "function") {
     filterCards();
     return;
   }
@@ -24,7 +26,7 @@ seasonFilter.addEventListener("change", function () {
 });
 edibleFilter.addEventListener("change", function () {
   currentFilters.edible = this.value;
-  if (!document.startViewTransition()) {
+  if (typeof document.startViewTransition !== "function") {
     filterCards();
     return;
   }
@@ -33,14 +35,36 @@ edibleFilter.addEventListener("change", function () {
   });
 });
 
+searchInput.addEventListener("input", function () {
+  currentFilters.search = this.value;
+  if (typeof document.startViewTransition !== "function") {
+    filterCards();
+    return;
+  }
+  document.startViewTransition(() => {
+    filterCards();
+  });
+});
+
+function normalizeSearch(query) {
+  return query.trim().toLowerCase();
+}
+
+function cardMatchesSearch(card, normalizedQuery) {
+  if (!normalizedQuery) return true;
+  return card.textContent.toLowerCase().includes(normalizedQuery);
+}
+
 function filterCards() {
+  const normalizedQuery = normalizeSearch(currentFilters.search);
   let hasvisibleCards = false;
   cards.forEach(function (card) {
     const season = card.querySelector("[data-season]").dataset.season;
     const edible = card.querySelector("[data-edible]").dataset.edible;
     const show =
       (currentFilters.season === "all" || currentFilters.season === season) &&
-      (currentFilters.edible === "all" || currentFilters.edible === edible);
+      (currentFilters.edible === "all" || currentFilters.edible === edible) &&
+      cardMatchesSearch(card, normalizedQuery);
     card.style.display = show ? "flex" : "none";
     if (show) {
       hasvisibleCards = true;

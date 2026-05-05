@@ -23,8 +23,10 @@
         <!-- Wrapper [same as container] -->
         <div class="wrapper" data-width="wide">
             <div class="site-header__inner">
-                <img src="images/Logo.svg" alt="Fungi-Finders logo">
-                <button aria-controls="primary-nav" area-expanded="false">
+                <a href="index.html" class="site-header__logo" aria-label="Fungi Finders home">
+                    <img src="images/Logo.svg" alt="Fungi-Finders logo">
+                </a>
+                <button type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
                     <span class="visually-hidden">Menu</span>
                     <img src="images/Frame 23.svg" alt="">
                 </button>
@@ -87,7 +89,9 @@
                 <div class="flow">
 
                     <h2 class="section-title">Get to know your mushrooms</h2>
-                    <div class="flex-group">
+                    <div class="flex-group mushroom-guide__filters">
+                        <label for="mushroom-search" class="visually-hidden">Search mushrooms by name or description</label>
+                        <input type="search" id="mushroom-search" class="mushroom-search" placeholder="Search mushrooms…" autocomplete="off">
                         <select name="season" id="season" hidden>
                             <option value="all">Season: All</option>
                             <option value="spring">Spring</option>
@@ -105,7 +109,7 @@
                         <!-- 12 cards here -->
                         <div class="card">
                             <h3 class="card__title">Chanterelle</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -129,7 +133,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Morel</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="toxic">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -155,7 +159,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Chicken of the Woods</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -181,7 +185,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Death Cap</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="toxic">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -207,7 +211,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Oyster Mushroom</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -233,7 +237,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Lion’s Mane</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -259,7 +263,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Destroying Angel</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="toxic">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -285,7 +289,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">King Bolete</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -311,7 +315,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Shaggy Mane</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -337,7 +341,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Maitake</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -363,7 +367,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">False Morel</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="toxic">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -389,7 +393,7 @@
                         </div>
                         <div class="card">
                             <h3 class="card__title">Matsutake</h3>
-                            <ul class="tag-list" role="list" area-label="Mushroom characteristics">
+                            <ul class="tag-list" role="list" aria-label="Mushroom characteristics">
                                 <li data-edible="edible">
                                     <span class="visually-hidden">
                                         This Mushroom is
@@ -422,7 +426,6 @@
         <section class="section background-extra-dark">
             <div class="wrapper flow" data-width="wide">
                 <h2 id="faq" class="section-title">Frequently Asked Questions</h2>
-                </h2>
                 <!-- Grid 3 columns and two rows-->
                 <div class="faq-bento">
                     <!-- 4 cards -->

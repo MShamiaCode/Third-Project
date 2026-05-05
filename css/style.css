@@ -459,6 +459,15 @@
      justify-content: space-between;
    }
 
+   .site-header__logo {
+     display: block;
+     line-height: 0;
+   }
+
+
+
+
+
    .hero {
      background-image: url(../images/hero.png);
      background-size: cover;
@@ -533,6 +542,31 @@
        -moz-border-radius: var(--border-radius-2);
        -ms-border-radius: var(--border-radius-2);
        -o-border-radius: var(--border-radius-2);
+     }
+
+     .mushroom-guide__filters {
+       align-items: center;
+     }
+
+     .mushroom-search {
+       flex: 1 1 12rem;
+       min-width: min(100%, 12rem);
+       padding: 0.5rem 1rem;
+       font-family: var(--ff-body, inherit);
+       font-size: var(--font-size-md, 1rem);
+       color: var(--text-main);
+       background-color: transparent;
+       border: 1px solid var(--background-accent-light);
+       border-radius: var(--border-radius-2);
+       outline: none;
+     }
+
+     .mushroom-search::placeholder {
+       color: var(--text-muted, #666);
+     }
+
+     .mushroom-search:focus {
+      border-color: var(--text-brand);
      }
    }
 
